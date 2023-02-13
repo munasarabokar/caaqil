@@ -1,0 +1,173 @@
+<div>
+    <% if (message.length > 0 ) { %>
+        <% if (message == 'delhistorydone') { %> <br>
+           <div class="alert alert-imaged alert-danger alert-dismissible fade show" role="alert">
+               <div class="icon-wrap">
+                <ion-icon name="close-circle-outline"></ion-icon>
+               </div>
+               <div>
+                   Deleted successfully ....
+               </div>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>
+        <% } else if (message == 'updatedpass') { %>
+            <div class="alert alert-imaged alert-warning alert-dismissible fade show" role="alert">
+                <div class="icon-wrap">
+                 <ion-icon name="close-circle-outline"></ion-icon>
+                </div>
+                <div>
+                   Password Has been Updated successfully ....
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } else if (message == 'updatedrole') { %>
+            <div class="alert alert-imaged alert-warning alert-dismissible fade show" role="alert">
+                <div class="icon-wrap">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                </div>
+                <div>
+                    Role and Time has been Updated successfully ....
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+       <% } %>
+</div> 
+<div class="card-block bg-primary mb-2">
+    <div class="card-main">
+        <div class="card-button dropdown">
+            <button type="button" class="btn btn-link btn-icon" data-bs-toggle="dropdown">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addCardActionSheet" href="#">
+                    <ion-icon name="pencil-outline"></ion-icon>Change Password 
+                </a>
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#role" href="#">
+                    <ion-icon name="pencil-outline"></ion-icon>Waqti ku darid 
+                </a>
+                <a href="#" data-bs-target="#delete" data-bs-toggle="modal" class="dropdown-item" >
+                    <ion-icon name="close-outline"></ion-icon>Remove
+                </a>
+            </div>
+            <div class="modal fade dialogbox" id="delete" data-bs-backdrop="static" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete</h5>
+                        </div>
+                        <div class="modal-body btn-text-primary">
+                          <p> Hadhow xogta history ga ma heli doontid ee ku saabsan</p> <p> <%= info.user_name %></p> .  Ma hubtaa inaad u tireesid ?
+                        </div>
+                        <div class="modal-footer">
+                                <div class="btn-inline">
+                                    <a href="#" class="btn bg-primary" data-bs-dismiss="modal">MAYA</a>
+                                    <a href="/deleteuser/<%= info.user_id%>" class="btn bg-danger">HAA</a>
+                                </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="balance">
+            <span class="label">USERNAME</span>
+            <h1 class="title"><%= info.user_name %> </h1>
+        </div>
+        <div class="in">
+            <div class="card-number">
+                <div class="card-expiry">
+                    <span class="label">ROLE</span>
+                   <%= info.role %> 
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="card-expiry">
+                    <span class="label">Waqtiga dhicitaanka</span>
+                   <%= info.expiretime.toDateString() %> 
+                </div>
+                <div class="card-ccv">
+                     <span class="label">SABAB</span>
+                    <%= info.sabab %> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade action-sheet" id="addCardActionSheet" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Reset Password </h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-sheet-content">
+                    <form action="/updatepass" method="post" autocomplete="off">
+                        <input type="hidden" name="user_id" value="<%= info.user_id %> ">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label">Change Password</label>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="password" id="cardnumber1" value="<%= info.user_password %>"  name="user_password" id="name" class="form-control"
+                                            placeholder="username" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group basic mt-2">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                data-bs-dismiss="modal">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade action-sheet" id="role" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit <%=  info.user_name %> </h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-sheet-content">
+                    <form action="/updaterole" method="post" autocomplete="off">
+                        <input type="hidden" name="user_id" value="<%= info.user_id %> ">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="cardnumber1">Role</label>
+                                <select name="role" class="form-control" id="">
+                                    <option value="<%= info.role %>"> You selected as : <%= info.role %></option>
+                                    <option value="subscriber">Subscriber</option>
+                                    <option value="banned">Banned</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="cardcvv">
+                                            Waqtiga dhiciaankiisa
+                                        </label>
+                                        <input type="date" name="created_at" value="<% info.expiretime %> "  class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group basic mt-2">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                data-bs-dismiss="modal">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

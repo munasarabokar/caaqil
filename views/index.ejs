@@ -1,0 +1,105 @@
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title><%= title %> </title>
+  <%- include('include/header'); -%> 
+</head>
+
+<body>
+
+
+
+    <!-- App Header componnents -->
+    <% if (caaqil == 'home') { %>
+     <%- include('include/home_head');  -%> 
+    <% } else if (caaqil == "all") { %>
+      <%- include('include/list_with_search_header');  -%> 
+    <% } else if (caaqil == "admin_list_users") { %>
+    <%- include('include/admin/listuser_head');  -%> 
+    <% } else if (caaqil == "setting") { %>
+        <%- include('include/home_setting');  -%> 
+    <% } else if (caaqil == 'hormuud') { %>
+        <%- include('include/c_p_n_head');  -%> 
+    <% } else if (caaqil == 'user_view') { %>
+        <%- include('include/admin/c_p_n_head');  -%> 
+    <% } else if (caaqil == 'login') { %>
+     
+    <% } %>
+   
+    <!-- * App Header -->
+
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+        <!-- Wallet Card -->
+     
+         <% if (caaqil == 'home') { %>
+            
+          <%- include('include/total'); -%> 
+        <% } else if (caaqil == "all") { %>
+           <%- include('include/listtop5'); -%> 
+        <% } else if (caaqil == "admin_list_users") { %>
+        <%- include('include/admin/listuser'); -%> 
+        <% } else if (caaqil == "setting") { %>
+            <%- include('include/settings_body'); -%> 
+        <% } else if (caaqil == 'login') { %>
+            <%- include('include/login'); -%> 
+        <% } else if (caaqil == 'hormuud') { %>
+         <%- include('include/cos_info')  -%> 
+        <% } else if (caaqil == 'user_view') { %>
+        <%- include('include/admin/cos_info')  -%> 
+         <% } else if (caaqil == 'sent') { %>
+            <%- include('include/sent')  -%> 
+        <% } else if (caaqil == 'banned') { %>
+            <%- include('include/banned')  -%> 
+        <% } %>
+        
+       
+        <!-- Wallet Card -->
+        <!-- Stats -->
+        <!-- * Stats -->
+        <!-- Transactions -->
+       
+        <!-- * List all top 5 -->
+        <!-- app footer -->
+        <div><br></div>
+        <% if (caaqil == 'all') { %>
+            <div class="appFooter">
+                <div class="footer-title">
+                    Copyright © munasar 2022. All Rights Reserved.
+                </div>
+            </div>
+            <% } else if (caaqil == 'hormuud') { %>
+                <div class="appFooter">
+                    <div class="footer-title">
+                        Copyright © munasar 2022. All Rights Reserved.
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="appFooter fixed-bar">
+                    <div class="footer-title">
+                        Copyright © munasar 2022. All Rights Reserved.
+                    </div>
+                </div>
+        <% } %>
+     
+        <!-- * app footer -->
+
+    </div>
+    <!-- * App Capsule -->
+
+   
+    <!-- ========= JS Files =========  -->
+    <!-- Bootstrap -->
+    <script src="/assets/js/lib/bootstrap.bundle.min.js"></script>
+    <!-- Splide -->
+    <script src="/assets/js/plugins/splide/splide.min.js"></script>
+
+
+</body>
+
+
+</html>

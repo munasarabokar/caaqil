@@ -1,0 +1,115 @@
+<% 
+// percentage
+var per = 18;
+// total all plus percentage
+if (!totalAll) {
+    var total = 0;
+    var tprofit = 0; ;
+} else {
+    var total = totalAll
+    var tprofit = per/118 * totalAll ;
+}
+
+// total paid and profit daily
+ if (!day) {
+    var days = 0;
+    var drofit = 0;
+ } else {
+    var days = day ;
+    var drofit = per/118 * day ;
+ }
+
+// total paid and profit Weekly
+if (!week) {
+    var weeks = 0 ;
+    var wprofit = 0 ;
+} else {
+    var weeks = week ;
+    var wprofit = per/118 * week ;
+}
+
+// total paid and profit Monthly
+if (!month) {
+    var months = 0 ;
+    var mprofit = 0 ;
+} else {
+    var months = month ;
+    var mprofit = per/118 * month ;
+}
+
+
+%> 
+
+
+<div class="section wallet-card-section pt-1">
+    <div class="wallet-card">
+        <!-- Balance -->
+        <div class="balance">
+            <div class="left">
+                <span class="title">Total Profit </span>
+                <h1 class="value text-success">$  <%= tprofit.toFixed(2) %> </h1>
+            </div>
+        </div>
+        <!-- * Wallet Footer -->
+    </div>
+</div>
+<div class="section">
+    <% if (message.length > 0 ) { %>
+        <% if (message == 'succ') { %>
+            <br>
+           <div class="alert alert-imaged alert-success alert-dismissible fade show" role="alert">
+               <div class="icon-wrap">
+                   <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+               </div>
+               <div>
+                   Logined as  <%= user.user_name  %>
+               </div>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>
+        <% } %>
+       <% } %>
+</div>
+<div class="section">
+    <div class="row mt-2">
+        <div class="col-6">
+            <div class="stat-box">
+                <div class="title">Daily Paid</div>
+                <div class="value text-danger">$ <%= days %> </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="stat-box">
+                <div class="title">Daily Profit</div>
+                <div class="value text-success">$ <%= drofit.toFixed(2) %> </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <div class="stat-box">
+                <div class="title">Weeky Paid</div>
+                <div class="value text-danger">$  <%= weeks %> </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="stat-box">
+                <div class="title">Weeky Profit</div>
+                <div class="value text-success">$  <%= wprofit.toFixed(2) %> </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <div class="stat-box">
+                <div class="title">Monthly Paid</div>
+                <div class="value text-danger">$  <%= months %> </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="stat-box">
+                <div class="title">Monthly Profit</div>
+                <div class="value text-success">$  <%= mprofit.toFixed(2) %> </div>
+            </div>
+        </div>
+    </div>
+</div>

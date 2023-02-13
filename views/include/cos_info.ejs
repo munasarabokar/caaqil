@@ -1,0 +1,298 @@
+<div>
+    <% if (message.length > 0 ) { %>
+        <% if (message == 'delhistorydone') { %> <br>
+           <div class="alert alert-imaged alert-danger alert-dismissible fade show" role="alert">
+               <div class="icon-wrap">
+                <ion-icon name="close-circle-outline"></ion-icon>
+               </div>
+               <div>
+                   Deleted successfully ....
+               </div>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>
+        <% } else if (message == 'updated') { %>
+            <div class="alert alert-imaged alert-warning alert-dismissible fade show" role="alert">
+                <div class="icon-wrap">
+                 <ion-icon name="close-circle-outline"></ion-icon>
+                </div>
+                <div>
+                    Updated successfully ....
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+       <% } %>
+</div> 
+<div class="card-block bg-primary mb-2">
+    <div class="card-main">
+        <div class="card-button dropdown">
+            <button type="button" class="btn btn-link btn-icon" data-bs-toggle="dropdown">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addCardActionSheet" href="#">
+                    <ion-icon name="pencil-outline"></ion-icon>Edit
+                </a>
+                <a href="#" data-bs-target="#delete" data-bs-toggle="modal" class="dropdown-item" >
+                    <ion-icon name="close-outline"></ion-icon>Remove
+                </a>
+            </div>
+            <div class="modal fade dialogbox" id="delete" data-bs-backdrop="static" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete</h5>
+                        </div>
+                        <div class="modal-body btn-text-primary">
+                          <p> Hadhow xogta history ga ma heli doontid ee ku saabsan</p> <p> <%= info.name %></p> .  Ma hubtaa inaad u tireesid ?
+                        </div>
+                        <div class="modal-footer">
+                                <div class="btn-inline">
+                                    <a href="#" class="btn bg-primary" data-bs-dismiss="modal">MAYA</a>
+                                    <a href="/delete/<%= info.cid %>" class="btn bg-danger">HAA</a>
+                                </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="balance">
+            <span class="label">MAGACA</span>
+            <h1 class="title"><%= info.name.substr(0, 15) %> ... </h1>
+        </div>
+        <div class="in">
+            <div class="card-number">
+                <span class="label">Hormuud</span>
+                <%= info.h_number %> 
+            </div>
+            <div class="bottom">
+                <div class="card-expiry">
+                    <span class="label">Somtel</span>
+                   <%= info.s_number %> 
+                </div>
+                <div class="card-ccv">
+                    <span class="label">Hormuud</span>
+                    <%= info.h_number %> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <a href="#" data-bs-target="#days" data-bs-toggle="modal" class="btn btn-block btn-lg btn-primary">1 MAALIN</a>
+                </div>
+                <div class="modal fade dialogbox" id="days" data-bs-backdrop="static" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">24 Saac Unlimited Data </h5>
+                            </div>
+                            <div class="modal-body">
+                                Ma hubtaa inaad u direesid ?
+                            </div>
+                            <div class="modal-footer">
+                                <form action="/trassection" method="post">
+                                    <div class="btn-inline">
+                                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">MAYA</a>
+                                            <input type="hidden" name="cid" value="<%= info.cid %>">
+                                            <input type="hidden" name="cid_number" value="<%= info.s_number %>">
+                                            <input type="hidden" name="qiimaha" value="0.5">
+                                            <input type="hidden" name="qiimaha_o" value="05">
+                                            <button type="submit" class="btn btn-text-primary">HAA</button>
+                                    
+                                        
+                                    </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="#" data-bs-target="#twodays" data-bs-toggle="modal" class="btn btn-block btn-lg btn-primary">2 MAALIN</a>
+                </div>
+                <div class="modal fade dialogbox" id="twodays" data-bs-backdrop="static" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">2 Maalin Unlimited Data </h5>
+                            </div>
+                            <div class="modal-body">
+                                Ma hubtaa inaad u direesid ?
+                            </div>
+                            <div class="modal-footer">
+                                <form action="/trassection" method="post">
+                                    <div class="btn-inline">
+                                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">MAYA</a>
+                                        
+                                            <input type="hidden" name="cid" value="<%= info.cid %>">
+                                            <input type="hidden" name="cid_number" value="<%= info.s_number %>">
+                                            <input type="hidden" name="qiimaha" value="1">
+                                            <input type="hidden" name="qiimaha_o" value="1">
+                                            <button type="submit" class="btn btn-text-primary">HAA</button>
+                                    </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <br>
+                <div class="row">
+                <div class="col">
+                    <a href="#" data-bs-target="#week" data-bs-toggle="modal" class="btn btn-block btn-lg btn-primary">1 ISBUUC</a>
+                </div>
+                <div class="modal fade dialogbox" id="week" data-bs-backdrop="static" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">1 Isbuuc Unlimited Data </h5>
+                            </div>
+                            <div class="modal-body">
+                                Ma hubtaa inaad u direesid ?
+                            </div>
+                            <div class="modal-footer">
+                                <form action="/trassection" method="post">
+                                    <div class="btn-inline">
+                                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">MAYA</a>
+                                        
+                                            <input type="hidden" name="cid" value="<%= info.cid %>">
+                                            <input type="hidden" name="cid_number" value="<%= info.s_number %>">
+                                            <input type="hidden" name="qiimaha" value="2.5">
+                                            <input type="hidden" name="qiimaha_o" value="2*5">
+                                            <button type="submit" class="btn btn-text-primary">HAA</button> 
+                                    </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="#" data-bs-target="#dato" data-bs-toggle="modal" class="btn btn-block btn-lg btn-primary">2 GB</a>
+                </div>
+                <div class="modal fade dialogbox" id="dato" data-bs-backdrop="static" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">2GB data aan dheceenin </h5>
+                            </div>
+                            <div class="modal-body">
+                                Ma hubtaa inaad u direesid ?
+                            </div>
+                            <div class="modal-footer">
+                                <form action="/trassection" method="post">
+                                    <div class="btn-inline">
+                                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">MAYA</a>
+                                        
+                                            <input type="hidden" name="cid" value="<%= info.cid %>">
+                                            <input type="hidden" name="cid_number" value="<%= info.s_number %>">
+                                            <input type="hidden" name="qiimaha" value="1">
+                                            <input type="hidden" name="qiimaha_o" value="daato">
+                                            <button type="submit" class="btn btn-text-primary">HAA</button>
+                                    
+                                        
+                                    </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="section mt-2 mb-2">
+    <div class="section-title">History</div>
+    <div class="card">
+
+        <div class="table-responsive">
+            <table class="table bg-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">Lacagta</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (history.length > 0) { %>
+                     <% history.forEach(element => { %>
+                        <tr>
+                            <th scope="row">$ <%= element.qiimaha%> </th>
+                            <td><%=  element.created_at.toString('en-US', {
+                                timeZone: 'Africa/Mogadishu'
+                              }) %> </td>
+                            <td> <a href="/delhistory/<%= element.id %>" class="btn btn-danger btn-xs">Delete</a>  </td>
+                        </tr>
+                     <% }) %>
+                    <% } else { %>
+                        <td>Waxbo looma dirin <%= info.name %>  </td>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade action-sheet" id="addCardActionSheet" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit <%=  info.name %> </h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-sheet-content">
+                    <form action="/update" method="post" autocomplete="off">
+                        <input type="hidden" name="id" value="13">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="cardnumber1">Magaca Qofka</label>
+                                <input type="hidden" value="<%= info.cid %> " name="user_id" id="user_id">
+                                <input type="text" id="cardnumber1" value="<%= info.name %>"  name="name" id="name" class="form-control"
+                                    placeholder="Enter Full name" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label">Hormuud</label>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input type="number" value="<%= info.h_number %>" name="h_n" id="h_n" class="form-control"
+                                                placeholder="Enter number" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="cardcvv">
+                                            Somtel
+                                        </label>
+                                        <input type="number" value="<%= info.s_number %>" name="s_n" id="s_n" class="form-control"
+                                            placeholder="Enter number" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group basic mt-2">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                data-bs-dismiss="modal">Update now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

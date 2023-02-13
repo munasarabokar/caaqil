@@ -1,0 +1,93 @@
+<% if(message.length > 0) { %>
+     <% if (message == 'bad') { %>
+        <div class="alert alert-imaged alert-warning alert-dismissible fade show" role="alert">
+            <div class="icon-wrap">
+                <ion-icon name="help-circle-outline"></ion-icon>
+            </div>
+            <div>
+               Please Login First
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } else if (message == 'pass') { %>
+        <div class="alert alert-imaged alert-danger alert-dismissible fade show" role="alert">
+            <div class="icon-wrap">
+                <ion-icon name="bonfire-outline"></ion-icon>
+            </div>
+            <div>
+               Password is incorrect
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } else if (message == 'email') { %>
+        <div class="alert alert-imaged alert-warning alert-dismissible fade show" role="alert">
+            <div class="icon-wrap">
+                <ion-icon name="alert-outline"></ion-icon>
+            </div>
+            <div>
+               username is not registered yet
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } else if (message == 'err') { %>
+        <div class="alert alert-imaged alert-danger alert-dismissible fade show" role="alert">
+            <div class="icon-wrap">
+                <ion-icon name="alert-outline"></ion-icon>
+            </div>
+            <div>
+                Login was not successfull ..
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+     <% } %>
+<% } %>
+<div id="appCapsule">
+
+    <div class="section mt-2 text-center">
+        <h1>Log in</h1>
+        <h4>Fill the form to log in</h4>
+    </div>
+    <div class="section mb-5 p-2">
+
+        <form action="/login" autocomplete="off" method="post">
+            <div class="card">
+                <div class="card-body pb-1">
+                    <div class="form-group basic">
+                        <div class="input-wrapper">
+                            <label class="label" for="email1">username</label>
+                            <input type="text" name="user_name" class="form-control" id="email1" placeholder="Your username" required >
+                            <i class="clear-input">
+                                <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                        </div>
+                    </div>
+
+                    <div class="form-group basic">
+                        <div class="input-wrapper">
+                            <label class="label" for="password1">Password</label>
+                            <input type="password" name="user_password" class="form-control" id="password1" 
+                                placeholder="Your password" required>
+                            <i class="clear-input">
+                                <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-links mt-2">
+                <div>
+                   <br>
+                </div>
+                <div</div>
+            </div>
+
+            <div class="form-links mt-2">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Log in</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

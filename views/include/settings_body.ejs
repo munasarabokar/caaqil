@@ -1,0 +1,145 @@
+
+ <% 
+ const date1 = new Date();
+ const date2 = expiretime
+
+ function getDifferenceInDays(date1, date2) {
+ const diffInMs = Math.abs(date2 - date1);
+ return diffInMs / (1000 * 60 * 60 * 24);
+ }
+%> 
+
+<div class="section mt-2 mb-2">
+    <% if (message.length > 0 ) { %>
+        <% if (message == 'delhistorydone') { %> <br>
+           <div class="alert alert-imaged alert-danger alert-dismissible fade show" role="alert">
+               <div class="icon-wrap">
+                <ion-icon name="close-circle-outline"></ion-icon>
+               </div>
+               <div>
+                   Deleted successfully ....
+               </div>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>
+        <% } else if (message == 'updated') { %>
+            <div class="alert alert-imaged alert-warning alert-dismissible fade show" role="alert">
+                <div class="icon-wrap">
+                 <ion-icon name="close-circle-outline"></ion-icon>
+                </div>
+                <div>
+                    Updated successfully ....
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+       <% } %>
+    <div class="goals">
+        <!-- item -->
+        <% if (role == 'admin') { %>
+        <div class="item">
+            <a href="/userlist" class="in">
+                <div>
+                    <h4>List users</h4>
+                    <p>Admin panel</p>
+                </div>
+                <div class="price"></div>
+            </a>
+        </div>
+        <% } %>
+        <div class="item">
+            <a data-bs-toggle="modal" data-bs-target="#user" href="#" class="in">
+                <div>
+                    <h4>Change username</h4>
+                    <p>badal username kaaga</p>
+                </div>
+                <div class="price"></div>
+            </a>
+        </div>
+        <div class="item">
+            <a data-bs-toggle="modal" data-bs-target="#pass" href="#" class="in">
+                <div>
+                    <h4>Change Password</h4>
+                    <p>badal Password kaaga</p>
+                </div>
+                <div class="price"></div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="/logout" class="in">
+                <div>
+                    <h4>Logout</h4>
+                    <p>Kabax dhamaan ciwaanka</p>
+                </div>
+                <div class="price"></div>
+            </a>
+        </div>
+        <!-- * item -->
+    </div>
+
+</div>
+
+<% if (role == 'admin') { %>
+    <div class="listview-title mt-2"> You are the admin of this app </strong></div>
+ <% } else { %>
+    <div class="listview-title mt-2"> Wuxuu dhacaaya  : <%= getDifferenceInDays(date1, date2).toFixed(0) %> Maalin kadib oo ku beegan :  <strong><%= expiretime.toDateString() %> </strong></div>
+   
+   
+<% } %>
+
+<div class="modal fade action-sheet" id="user" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit username</h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-sheet-content">
+                    <form action="/changeuser" method="post" autocomplete="off">
+                        <input type="hidden" name="id" value="13">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="cardnumber1">username</label>
+                                <input type="hidden" value="<%= info.user_id %>" name="user_id" id="user_id">
+                                <input type="text" id="cardnumber1" value="<%= info.user_name %>"  name="user_name" id="name" class="form-control"
+                                    placeholder="username" required>
+                            </div>
+                        </div>
+                        <div class="form-group basic mt-2">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                data-bs-dismiss="modal">Update now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade action-sheet" id="pass" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit password</h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-sheet-content">
+                    <form action="/changepass" method="post" autocomplete="off">
+                        <input type="hidden" name="id" value="13">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="cardnumber1">password</label>
+                                <input type="hidden" value="<%= info.user_id %>" name="user_id" id="user_id">
+                                <input type="password" id="cardnumber1" value="<%= info.user_password %>"  name="user_password" id="name" class="form-control"
+                                    placeholder="password" required>
+                            </div>
+                        </div>
+                        <div class="form-group basic mt-2">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                data-bs-dismiss="modal">Update now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

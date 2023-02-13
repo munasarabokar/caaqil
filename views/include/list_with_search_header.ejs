@@ -1,0 +1,88 @@
+<div class="appHeader">
+    <div class="left">
+        <a href="/" class="headerButton goBack">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </a>
+    </div>
+    <div class="pageTitle">
+      <% if (ss == 'yes') { %>
+       Search Result
+       <% } else { %>
+        List Your Costumers
+      <% } %>
+
+    </div>
+    <div class="right">
+        <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#addCardActionSheet">
+            <ion-icon name="add-outline"></ion-icon>
+        </a>
+    </div>
+</div>
+<div class="modal fade action-sheet" id="addCardActionSheet" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ku dar Macaamiil cusub</h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-sheet-content">
+                    <form action="/add" method="post" autocomplete="off">
+                        <input type="hidden" name="id" value="13">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="cardnumber1">Magaca Qofka</label>
+                                <input type="hidden" value="<%= user__id %> " name="user_id" id="user_id">
+                                <input type="text" id="cardnumber1"  name="name" id="name" class="form-control"
+                                    placeholder="Enter Full name" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label">Hormuud</label>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input type="number" name="h_n" id="h_n" class="form-control"
+                                                placeholder="Enter number" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="cardcvv">
+                                            Somtel
+                                        </label>
+                                        <input type="number" name="s_n" id="s_n" class="form-control"
+                                            placeholder="Enter number" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group basic mt-2">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                data-bs-dismiss="modal">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="extraHeader">
+    <form class="search-form" method="post" action="/search" autocomplete="off">
+        <div class="form-group searchbox">
+            <input type="number" name="search" class="form-control">
+            <i class="input-icon">
+                <ion-icon name="search-outline"></ion-icon>
+            </i>
+        </div>
+    </form>
+</div>
+

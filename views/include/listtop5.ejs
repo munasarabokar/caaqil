@@ -1,0 +1,72 @@
+
+<br>
+<div class="section mt-4">
+    <% if (message.length > 0 ) { %>
+        <% if (message == 'del') { %>
+           <div class="alert alert-imaged alert-danger alert-dismissible fade show" role="alert">
+               <div class="icon-wrap">
+                <ion-icon name="close-circle-outline"></ion-icon>
+               </div>
+               <div>
+                   Deleted successfully ....
+               </div>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>
+        <% } else if (message == 'celis') { %>
+        <div class="alert alert-imaged alert-warning alert-dismissible fade show" role="alert">
+            <div class="icon-wrap">
+                <ion-icon name="close-circle-outline"></ion-icon>
+            </div>
+            <div>
+                Hormuud ka wuu ku diiwan gashan yahay ....
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } else if (message == 'adddone') { %>
+            <div class="alert alert-imaged alert-success alert-dismissible fade show" role="alert">
+                <div class="icon-wrap">
+                    <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+                </div>
+                <div>
+                    Added successfully ....
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+       <% } %>
+</div>
+<% if (costumers.length >0 ) { %>
+ <% costumers.forEach(element => { %>
+  <div class="section mt-4">
+        <div class="transactions">
+            <!-- item -->
+            <a href="/id/<%= element.cid %>" class="item">
+                <div class="detail">
+                    <img src="assets/img/hlogo.png" alt="img" class="image-block imaged w48">
+                    <div>
+                        <strong><%= element.name %>  </strong>
+                        <p><%= element.h_number %> </p>
+                    </div>
+                </div>
+            </a>
+            <!-- * item -->
+        </div>
+    </div>
+ <% }) %>
+<% } else { %>
+    <div class="section mt-4">
+        <div class="transactions">
+            <!-- item -->
+            <a href="" class="item">
+                <div class="detail">
+                    <img src="assets/img/hlogo.png" alt="img" class="image-block imaged w48">
+                    <div>
+                        <strong>Name not found </strong>
+                        <p>Still not found yet .. </p>
+                    </div>
+                </div>
+            </a>
+            <!-- * item -->
+        </div>
+    </div>
+ <% } %> 

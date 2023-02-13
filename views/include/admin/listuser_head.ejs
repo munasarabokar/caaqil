@@ -1,0 +1,86 @@
+<div class="appHeader">
+    <div class="left">
+        <a href="/setting" class="headerButton goBack">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </a>
+    </div>
+    <div class="pageTitle">
+      <% if (ss == 'yes') { %>
+       Search Result
+       <% } else { %>
+        List Users
+      <% } %>
+
+    </div>
+    <div class="right">
+        <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#addCardActionSheet">
+            <ion-icon name="add-outline"></ion-icon>
+        </a>
+    </div>
+</div>
+<div class="modal fade action-sheet" id="addCardActionSheet" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">add users</h5>
+            </div>
+            <div class="modal-body">
+                <div class="action-sheet-content">
+                    <form action="/addusers" method="post" autocomplete="off">
+                        <input type="hidden" name="id" value="13">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="cardnumber1">username</label>
+                                <input type="text" id="cardnumber1"  name="user_name" id="name" class="form-control"
+                                    placeholder="username" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label">Password</label>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input type="password" id="cardnumber1"  name="user_password" id="name" class="form-control"
+                                                    placeholder="username" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="cardcvv">
+                                            Waqtiga dhiciaankiisa
+                                        </label>
+                                        <input type="date" name="created_at"  class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group basic mt-2">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                data-bs-dismiss="modal">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="extraHeader">
+    <form class="search-form" method="post" action="/usersearch" autocomplete="off">
+        <div class="form-group searchbox">
+            <input type="text" name="search" class="form-control">
+            <i class="input-icon">
+                <ion-icon name="search-outline"></ion-icon>
+            </i>
+        </div>
+    </form>
+</div>
+
