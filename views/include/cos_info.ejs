@@ -215,6 +215,7 @@
                     <tr>
                         <th scope="col">Lacagta</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Delete</th>
                     </tr>
                 </thead>
@@ -226,7 +227,8 @@
                             <td><%=  element.created_at.toString('en-US', {
                                 timeZone: 'Africa/Mogadishu'
                               }) %> </td>
-                            <td> <a href="/delhistory/<%= element.id %>" class="btn btn-danger btn-xs">Delete</a>  </td>
+                              <td> <a class="btn btn-warning btn-xs"><%= element.xaalada %></a>  </td>
+                              <td> <a href="/delhistory/<%= element.id %>" class="btn btn-danger btn-xs">Delete</a>  </td>
                         </tr>
                      <% }) %>
                     <% } else { %>

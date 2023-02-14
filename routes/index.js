@@ -490,6 +490,7 @@ router.post("/add" , function(request , response , next ) {
   var s_n = request.body.s_n ;
   var name = request.body.name ;
   var users_id = request.body.user_id ;
+  var xaalada = request.body.xaalada ;
   var sss = `SELECT * FROM macaamiil WHERE user_id = "${user_id}" AND h_number = "${h_n}"`;
   database.query(sss , function(error , data) {
     if (error) {
@@ -499,7 +500,7 @@ router.post("/add" , function(request , response , next ) {
         request.flash('success' , 'celis');
         response.redirect("/tops");
       } else {
-        var caaqil = (`INSERT INTO macaamiil ( user_id ,name, h_number, s_number) VALUES ('${users_id}' ,'${name}', '${h_n}', '${s_n}')`);
+        var caaqil = (`INSERT INTO macaamiil ( user_id ,name, h_number, s_number , types) VALUES ('${users_id}' ,'${name}', '${h_n}', '${s_n}' , '${xaalada}')`);
         database.query(caaqil , function(error , data ) {
           if(error) {
             response.redirect("/405");
