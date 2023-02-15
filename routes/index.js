@@ -29,7 +29,7 @@ router.get('/', function(request, response , next) {
              });
             } else {
                // day analys
-          var total_days = `SELECT SUM(qiimaha) as day FROM natiijo WHERE created_at > CURDATE() AND user_id = "${user_id}"`;
+          var total_days = `SELECT SUM(qiimaha) as day FROM natiijo WHERE created_at > CURDATE() AND user_id = "${user_id}" AND xaalada = "success"`;
           database.query(total_days , function (error,data) {
             if (data.length > 0) {
               for(tiro = 0 ; tiro < data.length ; tiro ++) {
@@ -38,7 +38,7 @@ router.get('/', function(request, response , next) {
             }
           });
           // week analys
-          var total_week = `SELECT SUM(qiimaha) as week FROM natiijo WHERE WEEK(created_at) = WEEK(now()) AND user_id = "${user_id}"`;
+          var total_week = `SELECT SUM(qiimaha) as week FROM natiijo WHERE WEEK(created_at) = WEEK(now()) AND user_id = "${user_id}" AND xaalada = "success"`;
           database.query(total_week , function (error,data) {
             if (data.length > 0) {
               for(tiro = 0 ; tiro < data.length ; tiro ++) {
@@ -47,7 +47,7 @@ router.get('/', function(request, response , next) {
             }
           });
           // month analys
-          var total_month = `select SUM(qiimaha) as month from natiijo where date_format(created_at,'%M') = date_format(now(),'%M') and date_format(created_at,'%M')=date_format(now(),'%M') AND user_id = "${user_id}"`;
+          var total_month = `select SUM(qiimaha) as month from natiijo where date_format(created_at,'%M') = date_format(now(),'%M') and date_format(created_at,'%M')=date_format(now(),'%M') AND user_id = "${user_id}" AND xaalada = "success"`;
           database.query(total_month , function (error,data) {
             if (data.length > 0) {
               for(tiro = 0 ; tiro < data.length ; tiro ++) {
@@ -56,7 +56,7 @@ router.get('/', function(request, response , next) {
             }
           });
           // total all paid analys
-          var total_month = `SELECT SUM(qiimaha) as total FROM natiijo WHERE user_id = "${user_id}"`;
+          var total_month = `SELECT SUM(qiimaha) as total FROM natiijo WHERE user_id = "${user_id}" AND xaalada = "success"`;
           database.query(total_month , function (error,data) {
             if (data.length > 0) {
               for(tiro = 0 ; tiro < data.length ; tiro ++) {

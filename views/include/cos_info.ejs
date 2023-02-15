@@ -224,9 +224,7 @@
                      <% history.forEach(element => { %>
                         <tr>
                             <th scope="row">$ <%= element.qiimaha%> </th>
-                            <td><%=  element.created_at.toString('en-US', {
-                                timeZone: 'Africa/Mogadishu'
-                              }) %> </td>
+                            <td><%=  element.created_at.toString() %> </td>
                               <td> <a class="btn btn-warning btn-xs"><%= element.xaalada %></a>  </td>
                               <td> <a href="/delhistory/<%= element.id %>" class="btn btn-danger btn-xs">Delete</a>  </td>
                         </tr>
