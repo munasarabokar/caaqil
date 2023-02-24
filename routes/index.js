@@ -2,7 +2,7 @@ const { response, request } = require('express');
 var express = require('express');
 var database = require('../db');
 var router = express.Router();
-
+var bcrypt = require('bcryptjs');
 /* GET home page still not done yet. */
 
 router.get('/', function(request, response , next) {
@@ -29,7 +29,7 @@ router.get('/', function(request, response , next) {
              });
             } else {
                // day analys
-          var total_days = `SELECT SUM(qiimaha) as day FROM natiijo WHERE created_at > CURDATE() AND user_id = "${user_id}" AND xaalada = "success"`;
+          var total_days = `SELECT SUM(amount) as day FROM natiijo WHERE created_at > CURDATE() AND user_id = "${user_id}" AND xaalada = "success"`;
           database.query(total_days , function (error,data) {
             if (data.length > 0) {
               for(tiro = 0 ; tiro < data.length ; tiro ++) {
@@ -38,7 +38,7 @@ router.get('/', function(request, response , next) {
             }
           });
           // week analys
-          var total_week = `SELECT SUM(qiimaha) as week FROM natiijo WHERE WEEK(created_at) = WEEK(now()) AND user_id = "${user_id}" AND xaalada = "success"`;
+          var total_week = `SELECT SUM(amount) as week FROM natiijo WHERE WEEK(created_at) = WEEK(now()) AND user_id = "${user_id}" AND xaalada = "success"`;
           database.query(total_week , function (error,data) {
             if (data.length > 0) {
               for(tiro = 0 ; tiro < data.length ; tiro ++) {
@@ -47,7 +47,7 @@ router.get('/', function(request, response , next) {
             }
           });
           // month analys
-          var total_month = `select SUM(qiimaha) as month from natiijo where date_format(created_at,'%M') = date_format(now(),'%M') and date_format(created_at,'%M')=date_format(now(),'%M') AND user_id = "${user_id}" AND xaalada = "success"`;
+          var total_month = `select SUM(amount) as month from natiijo where date_format(created_at,'%M') = date_format(now(),'%M') and date_format(created_at,'%M')=date_format(now(),'%M') AND user_id = "${user_id}" AND xaalada = "success"`;
           database.query(total_month , function (error,data) {
             if (data.length > 0) {
               for(tiro = 0 ; tiro < data.length ; tiro ++) {
@@ -56,7 +56,7 @@ router.get('/', function(request, response , next) {
             }
           });
           // total all paid analys
-          var total_month = `SELECT SUM(qiimaha) as total FROM natiijo WHERE user_id = "${user_id}" AND xaalada = "success"`;
+          var total_month = `SELECT SUM(amount) as total FROM natiijo WHERE user_id = "${user_id}" AND xaalada = "success"`;
           database.query(total_month , function (error,data) {
             if (data.length > 0) {
               for(tiro = 0 ; tiro < data.length ; tiro ++) {
@@ -66,16 +66,13 @@ router.get('/', function(request, response , next) {
           });
                 var query = `SELECT * FROM user_login WHERE user_id = "${user_id}"`;
                 database.query(query, function(error , data){
-                  if (error) {
-                    response.redirect("/404");
-                  } else {
+                  if (error) return response.status(500).json(error);
+
                     if (data.length > 0)  {
                       response.render('index', { title: 'Munasar App' , caaqil:'home' , user:data[0] , day:day , week:week , month:month, totalAll:totalAll , message:request.flash('success') , role:request.session.role  });
                     } else {
                       response.redirect("/404");
                     }
-                  
-                  }
             });
             }
           }
@@ -109,7 +106,7 @@ router.post('/login', function(request, response, next){
     var user_name = request.body.user_name;
 
   var user_password = request.body.user_password;
-
+ 
   if(user_name && user_password) {
     var query = (`
       SELECT * FROM user_login 
@@ -117,32 +114,37 @@ router.post('/login', function(request, response, next){
       `);
 
       database.query(query, function(error, data){
+        if (error) return response.status(500).json(error);
 
-          if(data.length > 0)  {
-              for(var count = 0; count < data.length; count++)
-              {
-                  if(data[count].user_password == user_password) {
-                      request.session.user_id = data[count].user_id;
-                      request.session.role = data[count].role
-                      request.session.expiretime = data[count].expiretime
-                      if (request.session.user_id) {
-                        request.flash('success' , 'succ');
-                        response.redirect("/");
-                      } else {
-                        request.flash('success' , 'err');
-                        response.redirect("/login");
-                      }
-                     
-                  } else   {
-                      request.flash('success' , 'pass');
-                      response.redirect("/login");
-                  }
-              }
-          }  else {
-              request.flash('success' , 'email');
+        if (data.length === 0) {
+          request.flash('success' , 'email');
+          response.redirect("/login");
+
+        }
+            const isPasswordCorrect = bcrypt.compareSync(
+              request.body.user_password,
+              data[0].user_password
+            );
+            if (!isPasswordCorrect) {
+              request.flash('success' , 'err');
               response.redirect("/login");
-          }
-          response.end();
+            }
+
+           
+              request.session.user_id = data[0].user_id;
+              request.session.role = data[0].role
+              request.session.expiretime = data[0].expiretime
+            //  response.status(200).json(request.session.user_id);
+              if (request.session.user_id) {
+                request.flash('success' , 'succ');
+                response.redirect("/");
+              } else {
+                response.status(200).json('not success');
+              }
+
+           
+          
+          
       });
   }
   else
@@ -624,10 +626,10 @@ router.post("/trassection" , function(request,response,next) {
   user_id = request.session.user_id;
   if (user_id) {  
    cid = request.body.cid ;
-   q_in = request.body.qiimaha;
+   q_in = request.body.amount;
    s_n = request.body.cid_number;
-   q_o = request.body.qiimaha_o;
-   var select = `INSERT INTO natiijo (user_id, cos_id, qiimaha ) VALUES ("${user_id}","${cid}", "${q_in}")`;
+   q_o = request.body.amount_o;
+   var select = `INSERT INTO natiijo (user_id, cos_id, amount ) VALUES ("${user_id}","${cid}", "${q_in}")`;
    database.query(select, function(error,data) {
     if (error) { 
       throw error
