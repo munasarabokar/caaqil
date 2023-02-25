@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret:'munasar',
-  cookie: {maxAge : 60000},
+  cookie: {maxAge : 160000},
   saveUninitialized: true,
   resave: true
 }));
